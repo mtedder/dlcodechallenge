@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import CurrentTemp from './Components/CurrentTemp';
+import FiveDayTemp from './Components/FiveDayTemp';
 
 /**
  * Refs:
@@ -40,6 +41,8 @@ class App extends React.Component {
     return (
       <div className="App">
         <CurrentTemp poslat={this.state.poslat} poslong={this.state.poslong} />
+
+        <FiveDayTemp poslat={this.state.poslat} poslong={this.state.poslong} />
       </div>
     );
   }
