@@ -8,13 +8,25 @@ import CurrentTemp from './Components/CurrentTemp';
  * https://nodejs.org/en/download/
  * https://create-react-app.dev/docs/getting-started
  * https://reactjs.org/tutorial/tutorial.html
+ * https://www.pluralsight.com/guides/how-to-use-geolocation-call-in-reactjs
  */
-function App() {
-  return (
-    <div className="App">
-      <CurrentTemp />
-    </div>
-  );
+class App extends React.Component {
+
+
+  componentDidMount() {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      console.log("Latitude is :", position.coords.latitude);
+      console.log("Longitude is :", position.coords.longitude);
+    });
+  }
+  
+  render(){
+    return (
+      <div className="App">
+        <CurrentTemp />
+      </div>
+    );
+  }
 }
 
 export default App;
