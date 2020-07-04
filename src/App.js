@@ -19,6 +19,9 @@ import axios from 'axios';
  * https://react-bootstrap.github.io/components/tabs/
  * https://create-react-app.dev/docs/adding-bootstrap/
  * https://alligator.io/react/axios-react/
+ * https://react-bootstrap.github.io/components/table/#table-small
+ * https://stackoverflow.com/questions/48699820/how-do-i-hide-api-key-in-create-react-app
+ * 
  */
 class App extends React.Component {
 
@@ -41,14 +44,14 @@ class App extends React.Component {
         // console.log("Latitude is :", position.coords.latitude);
         // console.log("Longitude is :", position.coords.longitude);
         //Get current temperature from weather api
-        axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=` + position.coords.latitude + `&lon=` + position.coords.longitude + `&appid=`)
+        axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=` + position.coords.latitude + `&lon=` + position.coords.longitude + `&appid=` + process.env.REACT_APP_WEATHER_API_KEY)
           .then(res => {
             const data = res.data;
             that.setState({ weatherData: data.main.temp })
             // console.log(data);
           })
         //Get 5 day forecast
-        axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=` + position.coords.latitude + `&lon=` + position.coords.longitude + `&appid=`)
+        axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=` + position.coords.latitude + `&lon=` + position.coords.longitude + `&appid=` + process.env.REACT_APP_WEATHER_API_KEY)
           .then(res => {
             const data = res.data;
             that.setState({forecast: JSON.stringify(data.list)})
