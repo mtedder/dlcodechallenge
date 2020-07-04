@@ -27,7 +27,8 @@ class App extends React.Component {
     this.state = {
       poslat: null,//latitude
       poslong: null,//longitude
-      weatherData: null //weather data
+      weatherData: null, //weather data
+      forecast:  null //5 day forecast data as json string
     };
   }
 
@@ -40,21 +41,19 @@ class App extends React.Component {
         // console.log("Latitude is :", position.coords.latitude);
         // console.log("Longitude is :", position.coords.longitude);
         //Get current temperature from weather api
-        axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=`+ position.coords.latitude + `&lon=` + position.coords.longitude + `&appid=`)
+        axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=` + position.coords.latitude + `&lon=` + position.coords.longitude + `&appid=`)
           .then(res => {
             const data = res.data;
-            that.setState({weatherData:data.main.temp})
-            console.log(data);
+            that.setState({ weatherData: data.main.temp })
+            // console.log(data);
           })
-//Get 5 day forecast
-          axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=`+ position.coords.latitude + `&lon=` + position.coords.longitude + `&appid=`)
+        //Get 5 day forecast
+        axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=` + position.coords.latitude + `&lon=` + position.coords.longitude + `&appid=`)
           .then(res => {
             const data = res.data;
-            //that.setState({weatherData:data.main.temp})
-            console.log(data);
+            that.setState({forecast: JSON.stringify(data.list)})
+            // console.log(data);
           })
-
-         
       },
       function (error) {
         console.error("Error Code = " + error.code + " - " + error.message);
@@ -67,10 +66,10 @@ class App extends React.Component {
       <div className="App">
         <Tabs>
           <Tab label="Current Temperature">
-            <CurrentTemp poslat={this.state.poslat} poslong={this.state.poslong} weatherData={this.state.weatherData}/>
+            <CurrentTemp poslat={this.state.poslat} poslong={this.state.poslong} weatherData={this.state.weatherData} />
           </Tab>
           <Tab label="3-Hourly Five Day Forecasts">
-            <FiveDayTemp poslat={this.state.poslat} poslong={this.state.poslong} />
+            <FiveDayTemp poslat={this.state.poslat} poslong={this.state.poslong} forecast={this.state.forecast} />
           </Tab>
         </Tabs>
       </div>
