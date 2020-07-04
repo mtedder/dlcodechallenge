@@ -11,7 +11,7 @@ class FiveDayTemp extends React.Component {
    render(){
     return (
         <div className="fiveday-temp">
-            <h2>3-Hourly Forecasts</h2>
+            <h2>3-Hourly Five Day Forecasts</h2>
             {this.props.poslat}, {this.props.poslong}
         </div>
     );
