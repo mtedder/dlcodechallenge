@@ -12,7 +12,9 @@ class CurrentTemp extends React.Component {
     return (
         <div className="current-temp">
             <h2>Current Temperature</h2>
-            {this.props.poslat}, {this.props.poslong}
+            Current Location:{this.props.poslat}, {this.props.poslong}
+            <br/>
+            Temperature: {this.props.weatherData}
         </div>
     );
    }
