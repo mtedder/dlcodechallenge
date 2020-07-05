@@ -1,58 +1,45 @@
 import React from 'react'
 import Table from 'react-bootstrap/Table'
+import './index.css';
 
+//Five day forecast table component
 class FiveDayTemp extends React.Component {
 
     constructor(props) {
         super(props);
-        console.log(props)
         this.state = {
         };
     }
 
-    getRowsData = function () {
-        console.log("Hello");
-        //var items = JSON.parse(this.props.forecast);
-        //var keys = this.getKeys();
-        //console.log(items);
-        // return items.map((row, index)=>{
-        // return <tr key={index}><Table key={index} data={row} keys={keys}/></tr>
-        // })
-    }
-
     render() {
-        //const data = [{ "name": "test1" }, { "name": "test2" }];
         const data = JSON.parse([this.props.forecast])
-        // console.log(JSON.parse([this.props.forecast]));
-        data.list.map((d) => console.log(d.main.temp + "," + d.dt_txt + "," + d.weather[0].icon));
-        //const listItems = data.map((d) => <li key={d.name}>{d.name}</li>);
         return (
             <div className="fiveday-temp">
                 <h2>3-Hourly Five Day Forecasts</h2>
                 Current Location:{this.props.poslat}, {this.props.poslong}
+                <br/>
+                City: {this.props.city}
                 <br />
-                {/* Forecasts: {this.props.forecast} */}
-
                 <Table striped bordered hover size="sm">
                     <thead>
                         <tr>
-                            <th>Icon</th>
+                            <th>Weather Conditions</th>
                             <th>Date and Time</th>
                             <th>Temperature (F)</th>
                         </tr>
                     </thead>
                     <tbody>
-                       
-                        <tr>
-                            <td>1</td>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                        </tr>
+                        {data.list.map((row, i) => {
+                            const imgurl = "http://openweathermap.org/img/wn/" + row.weather[0].icon + "@2x.png"
+                            const dataStr = new Date(row.dt_txt) //display data & time in locale format
+                            return (
+                                <tr>
+                                    <td><img src={imgurl} alt={row.weather[0].main} width="50" height="50"/></td>
+                                    <td> {dataStr.toLocaleString()}</td>
+                                    <td>{row.main.temp}</td>
+                                </tr>
+                            )
+                        })}
                     </tbody>
                 </Table>
             </div>
