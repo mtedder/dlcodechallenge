@@ -31,7 +31,7 @@ class App extends React.Component {
       poslat: null,//latitude
       poslong: null,//longitude
       weatherData: null, //weather data
-      forecast:  null //5 day forecast data as json string
+      forecast: null //5 day forecast data as json string
     };
   }
 
@@ -44,17 +44,17 @@ class App extends React.Component {
         // console.log("Latitude is :", position.coords.latitude);
         // console.log("Longitude is :", position.coords.longitude);
         //Get current temperature from weather api
+        //  axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=` + position.coords.latitude + `&lon=` + position.coords.longitude + `&appid=` + process.env.REACT_APP_WEATHER_API_KEY)
         axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=` + position.coords.latitude + `&lon=` + position.coords.longitude + `&appid=` + process.env.REACT_APP_WEATHER_API_KEY)
           .then(res => {
             const data = res.data;
             that.setState({ weatherData: data.main.temp })
-            // console.log(data);
           })
         //Get 5 day forecast
         axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=` + position.coords.latitude + `&lon=` + position.coords.longitude + `&appid=` + process.env.REACT_APP_WEATHER_API_KEY)
           .then(res => {
             const data = res.data;
-            that.setState({forecast: JSON.stringify(data.list)})
+            that.setState({ forecast: JSON.stringify(data) })
             // console.log(data);
           })
       },
@@ -64,7 +64,13 @@ class App extends React.Component {
     );
   }
 
+  componentDidUpdate() {
+  }
+
   render() {
+    //const data =JSON.parse(this.state.forecast);
+    //const data =this.state.forecast;
+    // console.log(this.state.forecast)
     return (
       <div className="App">
         <Tabs>
