@@ -70,10 +70,10 @@ class App extends React.Component {
       <div className="App">
         <Tabs>
           <Tab label="Current Temperature">
-            <CurrentTemp poslat={this.state.poslat} poslong={this.state.poslong} weatherData={this.state.weatherData}  city={this.state.city}/>
+            <CurrentTemp poslat={this.state.poslat} poslong={this.state.poslong} weatherData={this.state.weatherData} city={this.state.city} />
           </Tab>
           <Tab label="3-Hourly Five Day Forecasts">
-            <FiveDayTemp poslat={this.state.poslat} poslong={this.state.poslong} forecast={this.state.forecast} city={this.state.city}/>
+            <FiveDayTemp poslat={this.state.poslat} poslong={this.state.poslong} forecast={this.state.forecast} city={this.state.city} />
           </Tab>
         </Tabs>
       </div>
