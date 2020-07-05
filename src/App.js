@@ -43,11 +43,7 @@ class App extends React.Component {
     navigator.geolocation.getCurrentPosition(
       function (position) {
         that.setState({ poslat: position.coords.latitude, poslong: position.coords.longitude });
-        // console.log(position);
-        // console.log("Latitude is :", position.coords.latitude);
-        // console.log("Longitude is :", position.coords.longitude);
         //Get current temperature from weather api
-        //  axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=` + position.coords.latitude + `&lon=` + position.coords.longitude + `&appid=` + process.env.REACT_APP_WEATHER_API_KEY)
         axios.get(`https://api.openweathermap.org/data/2.5/weather?units=imperial&lat=` + position.coords.latitude + `&lon=` + position.coords.longitude + `&appid=` + process.env.REACT_APP_WEATHER_API_KEY)
           .then(res => {
             const data = res.data;
@@ -58,7 +54,6 @@ class App extends React.Component {
           .then(res => {
             const data = res.data;
             that.setState({ forecast: JSON.stringify(data) })
-            // console.log(data);
           })
       },
       function (error) {
@@ -71,9 +66,6 @@ class App extends React.Component {
   }
 
   render() {
-    //const data =JSON.parse(this.state.forecast);
-    //const data =this.state.forecast;
-    // console.log(this.state.forecast)
     return (
       <div className="App">
         <Tabs>
